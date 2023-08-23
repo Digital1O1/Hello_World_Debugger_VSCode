@@ -1,7 +1,7 @@
 #include <iostream>
 
 using namespace std;
-
+// G++ command used to compile main.cpp --> g++ main.cpp -o main
 int main()
 {
     printf("Program started...\r\n");
