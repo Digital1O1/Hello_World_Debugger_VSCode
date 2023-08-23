@@ -23,10 +23,9 @@
 
 <br>
 
-<s>
-
 # Step 2 : Change The `DISPLAY` Envionment Variable
 
+<s>
 ## 1) Open Powershell
 
 -   Press Windows key
@@ -50,14 +49,14 @@
     ```
 -   Changing the PowerShell Execution Policy - Open Powershell - Enter the following
     `bash
-        Set-ExecutionPolicy RemoteSigned
-        ` - You'll be prompted the following, just enter [Y] to confirm the action hit ENTER
-    `        Execution Policy Change
-            The execution policy helps protect you from scripts that you do not trust. Changing the execution policy might expose you to the
-            security risks described in the about_Execution_Policies help topic at https:/go.microsoft.com/fwlink/?LinkID=135170. Do you want to
-            change the execution policy?
-            [Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "N"): 
-       `
+    Set-ExecutionPolicy RemoteSigned
+    ` - You'll be prompted the following, just enter [Y] to confirm the action hit ENTER
+    `       Execution Policy Change
+        The execution policy helps protect you from scripts that you do not trust. Changing the execution policy might expose you to the
+        security risks described in the about_Execution_Policies help topic at https:/go.microsoft.com/fwlink/?LinkID=135170. Do you want to
+        change the execution policy?
+        [Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "N"): 
+  `
     </s>
 
 ## 1) Add DISPLAY Variable To Enviornment Variables in WINDOWS
@@ -149,20 +148,32 @@ sudo nano ~/.ssh/authorized_keys
 ## 5) Enable X11 Port Fowarding On The Host Machine
 
 -   On your host machine
+
     -   Open a Powershell instance
     -   Use the :
+
         -   `cd` command to return back to the `.ssh` folder
         -   `-ls -a` command to list everything stored in the `.ssh` folder
+
             -   You should see a `config` file
                 -   If not, use the following command
                 ```bash
                 vim config
                 ```
             -   Use either `vim` or `nano` to edit the `config` file and enter the following WITHOUT THE BRACKETS
+
             ```bash
                 Host [YOUR RASPBERRY PI IP ADDRESS]
                     HostName [YOUR RASPBERRY PI IP ADDRESS]
                     User [YOUR RASPBERRY PI USER NAME]
+                    ForwardAgent yes
+                    ForwardX11 yes
+                    ForwardX11Trusted yes
+
+                # Example
+                Host 192.123.56.111
+                    HostName 192.123.56.111
+                    User pi
                     ForwardAgent yes
                     ForwardX11 yes
                     ForwardX11Trusted yes
@@ -177,11 +188,9 @@ sudo nano ~/.ssh/authorized_keys
 -   Select `Start no client`
 -   Select `Disable access control`
 
-        ![image](https://github.com/Digital1O1/Remotely-Debug-C-Programs-on-RPI-Using-VS-Code/assets/39348633/37ac7d8a-0290-42d4-83fb-c009585250bf)
-
-        ![image](https://github.com/Digital1O1/Remotely-Debug-C-Programs-on-RPI-Using-VS-Code/assets/39348633/166a0723-1487-4df6-bbfb-151a814afbee)
-
-        ![image](https://github.com/Digital1O1/Remotely-Debug-C-Programs-on-RPI-Using-VS-Code/assets/39348633/05ca05ea-1706-4e6f-b9b7-6a3e75f53b48)
+    ![image](https://github.com/Digital1O1/Hello_World_Debugger_VSCode/assets/39348633/19709946-09d7-436d-8727-9ac44e0297b4)
+    ![image](https://github.com/Digital1O1/Hello_World_Debugger_VSCode/assets/39348633/6597c263-ed76-41df-b720-cd9d1a607167)
+    ![image](https://github.com/Digital1O1/Hello_World_Debugger_VSCode/assets/39348633/0d0eb291-a93b-4490-84e3-57c5a0a04dd7)
 
     <br>
 
@@ -217,17 +226,17 @@ sudo nano ~/.ssh/authorized_keys
 ## 1) Setting up the debugger
 
 -   In VS Code find the `run` option
-    -   Then click on -->
+    -   Then click on :
         -   `Add Configruation`
         -   `C++(GDB/LLDB)`
         -   `Add configuration`
         -   `C/C++: (gdb) Launch`
-    -   References for the mentioned steps can be found below
-    -   Afterwards you should see a .vscode folder in the `EXPLORER` menu
+    -   References for the mentioned steps can be found in the screenshots below
         ![image](https://github.com/Digital1O1/Hello_World_Debugger_VSCode/assets/39348633/2f574e99-6530-43af-b9a3-d1a0127ddab4)
         ![image](https://github.com/Digital1O1/Hello_World_Debugger_VSCode/assets/39348633/3a412b3a-d9c6-4ee4-b4b5-58ab8670ae18)
         ![image](https://github.com/Digital1O1/Hello_World_Debugger_VSCode/assets/39348633/08cc15da-4919-4171-ae01-330b3ac594f9)
         ![image](https://github.com/Digital1O1/Hello_World_Debugger_VSCode/assets/39348633/64c45fce-493b-4513-bd5e-34548dfbd6a5)
+-   Afterwards you should see a .vscode folder in the `EXPLORER` menu
 -   A `launch.json` file should be generated at this point
     -   The only changes that need to be made is the `"program"` argument since the debugger needs to `point` towards the executiable file
         -   Original version
@@ -243,26 +252,25 @@ sudo nano ~/.ssh/authorized_keys
 
 ## 2) Running the Debugger
 
-- Set a break point anywhere in the `main.cpp` file as indicated by the `RED ARROW`
+-   Set a break point anywhere in the `main.cpp` file as indicated by the `RED ARROW`
     ![image](https://github.com/Digital1O1/Hello_World_Debugger_VSCode/assets/39348633/4c7f23d6-1207-4a3d-baa6-671d773c8598)
 
-- There's two ways to run the Debugger 
-- In the `Run` options you can manually select `Start Debugger` - Or you can just press `F5`
-- Once the Debugger runs
-    - The yellow line indicates where you're at in the program
-    - The menu circled in red does the following
-        - The `play` button 
-            - When pressed, the program will run until it hits the next breakpoint
-        - The `step-over` button
-            - When pressed, if the next line the debugger is about to 'step into' is a function, you can esentially skip over it
-        - The `step into` button
-            - As the name implies, you can step into any function
-            - Or manually step through every line of code to have a better understanding of what's going on with the program
-        - The `step out` button
-            - When pressed while in a C++ function
-            - You can 'exit' out of the function and use a different debugging command 
-        - The `restart` and `stop` button
-            - I'm pretty sure these buttons can explain themselves  
+-   There's two ways to run the Debugger
+-   In the `Run` options you can manually select `Start Debugger` - Or you can just press `F5`
+-   Once the Debugger runs
+    -   The `yellow line` indicates where you're at in the program
+    -   The menu circled in red does the following
+        -   The `play` button
+            -   When pressed, the program will run until it hits the next breakpoint
+        -   The `step-over` button
+            -   When pressed, if the next line the debugger is about to 'step into' is a function, you can esentially skip over it
+        -   The `step into` button
+            -   As the name implies, you can step into any function
+            -   Or manually step through every line of code to have a better understanding of what's going on with the program
+        -   The `step out` button
+            -   When pressed while in a C++ function
+            -   You can 'exit' out of the function and use a different debugging command
+        -   The `restart` and `stop` button
+            -   I'm pretty sure these buttons can explain themselves
 
 ![image](https://github.com/Digital1O1/Hello_World_Debugger_VSCode/assets/39348633/e61214a5-ac5d-48be-a520-4e5a6adc9a93)
-<br>
