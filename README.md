@@ -75,7 +75,7 @@
 
 <br>
 
-# Step 3 : Generate SSH Key
+# Step 3 : Generate SSH Key On Your Host Machine/Workstation
 
 ## 1) Create .ssh 'folder'
 
@@ -96,16 +96,19 @@ ssh-keygen -t ed25519
 
 -   When prompted :
     -   `Enter file in which to save the key (/home/local/.ssh/id_rsa)`
-        -   Choose `.ssh`
+        -   <s>Choose `.ssh`</s>
+        - Just press ENTER
     -   `Enter passphrase (empty for no passphrase): `
         -   Just press ENTER
-    -   `Enter same passphrase agian:`
-        -   Just press ENTER agian
--   You'll then be promped with your `key fingerprint` and your key's `randomart image` as shown in the screenshot below
+    -   `Enter same passphrase again:`
+        -   Just press ENTER again
+-   You'll then be prompted with your `key fingerprint` and your key's `randomart image` as shown in the example screenshot below
     ![image](https://github.com/Digital1O1/4_DOF_Robotic_Arm/assets/39348633/0293f80d-ad1e-4e73-b473-93715c6ef266)
 
--   Find the directory where your newly generated SSH keys are stored - In my case it's in the following directory
-
+-   Find the directory where your newly generated SSH keys are stored
+    - In my case, it's in the following directory
+    - Copy the newly generated SSH key since we're going to paste it into a different file in the Raspberry PI/Linux device
+ 
 ```bash
  C:\Users\S123456789\.ssh
 ```
@@ -115,7 +118,7 @@ ssh-keygen -t ed25519
 -   You can use either `VI` or `VIM` to view the contents of your `public key`
     ![image](https://github.com/Digital1O1/4_DOF_Robotic_Arm/assets/39348633/d00623bc-6fb1-465d-aa29-97f43a78b550)
 
-## 3) Save SSH Key on Raspberry PI
+## 3) Save SSH Key on Raspberry PI or LINUX device
 
 -   Type in the following commands in your Raspberry PI terminal
 
